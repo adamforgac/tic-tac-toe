@@ -60,6 +60,33 @@ const gameBoard = (() => {
                 const playGround = document.querySelector(".playground");
                 playGround.querySelector(`[data-attribute="${i}"]`).textContent = gamePlan[i];
             }
+            checkForWin();
+        }
+    }
+
+    const checkForWin = () => {
+        if(
+            (gamePlan[0] === "X" && gamePlan[1] === "X" && gamePlan[2] === "X") ||
+            (gamePlan[3] === "X" && gamePlan[4] === "X" && gamePlan[5] === "X") ||
+            (gamePlan[6] === "X" && gamePlan[7] === "X" && gamePlan[8] === "X") ||
+            (gamePlan[0] === "X" && gamePlan[3] === "X" && gamePlan[6] === "X") ||
+            (gamePlan[1] === "X" && gamePlan[4] === "X" && gamePlan[7] === "X") ||
+            (gamePlan[2] === "X" && gamePlan[5] === "X" && gamePlan[8] === "X") ||
+            (gamePlan[0] === "X" && gamePlan[4] === "X" && gamePlan[8] === "X") ||
+            (gamePlan[2] === "X" && gamePlan[4] === "X" && gamePlan[6] === "X")
+        ) {
+            console.log("win X")
+        } else if(
+            (gamePlan[0] === "O" && gamePlan[1] === "O" && gamePlan[2] === "O") ||
+            (gamePlan[3] === "O" && gamePlan[4] === "O" && gamePlan[5] === "O") ||
+            (gamePlan[6] === "O" && gamePlan[7] === "O" && gamePlan[8] === "O") ||
+            (gamePlan[0] === "O" && gamePlan[3] === "O" && gamePlan[6] === "O") ||
+            (gamePlan[1] === "O" && gamePlan[4] === "O" && gamePlan[7] === "O") ||
+            (gamePlan[2] === "O" && gamePlan[5] === "O" && gamePlan[8] === "O") ||
+            (gamePlan[0] === "O" && gamePlan[4] === "O" && gamePlan[8] === "O") ||
+            (gamePlan[2] === "O" && gamePlan[4] === "O" && gamePlan[6] === "O")
+        ) {
+            console.log("win O")
         }
     }
     return {getCell, gamePlan};
