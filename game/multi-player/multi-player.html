@@ -47,7 +47,7 @@
                 </div>
                 
                 <div class="score-area1">
-                    <h2>Match<br><span class="score-number">4</span></h2>
+                    <h2>Match<br><span class="score-number">0</span></h2>
                 </div>
 
                 <div class="empty">
@@ -57,15 +57,15 @@
 
             <div class="game-field">
                 <div class="playground">
-                    <div class="cell cell1 top left"></div>
-                    <div class="cell cell2 top"></div>
-                    <div class="cell cell3 top right"></div>
-                    <div class="cell cell4 left"></div>
-                    <div class="cell cell5"></div>
-                    <div class="cell cell6 right"></div>
-                    <div class="cell ell7 left bottom"></div>
-                    <div class="cell cell8 bottom"></div>
-                    <div class="cell cell9 right bottom"></div>
+                    <div class="cell cell1 top left" data-attribute="0"></div>
+                    <div class="cell cell2 top" data-attribute="1"></div>
+                    <div class="cell cell3 top right" data-attribute="2"></div>
+                    <div class="cell cell4 left" data-attribute="3"></div>
+                    <div class="cell cell5" data-attribute="4"></div>
+                    <div class="cell cell6 right" data-attribute="5"></div>
+                    <div class="cell cell7 left bottom" data-attribute="6"></div>
+                    <div class="cell cell8 bottom" data-attribute="7"></div>
+                    <div class="cell cell9 right bottom" data-attribute="8"></div>
                 </div>
             </div>
 
@@ -75,7 +75,7 @@
                 </div>
                 
                 <div class="score-area2">
-                    <h2>Score<br><span class="score-number">2:1</span></h2>
+                    <h2>Score<br><span class="score-number"><span class="number1">0</span>:<span class="number2">0</span></span></h2>
                 </div>
 
                 <div class="scam-area2">
@@ -92,7 +92,32 @@
             <div class="profile2">
                 <i class="fa-regular fa-circle-user"></i>
 
-                <p>BOT</p>
+                <p>Player 2</p>
+            </div>
+        </div>
+
+        <div class="name-form">
+            <div class="heading-area">
+                <h2>Choose your name</h2>
+            </div>
+
+            <div class="form-area">
+                <form action="">
+                    <div class="player1-name">
+                        <label for="player1_name">Player 1</label>
+                        <input type="text" id="player1_name" required>
+                    </div>
+    
+                    <div class="player2-name">
+                        <label for="player2_name">Player 2
+                        </label>
+                        <input type="text" id="player2_name" required>
+                    </div>
+
+                    <div class="submit-button">
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

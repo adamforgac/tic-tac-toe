@@ -257,10 +257,6 @@ a i {
     width: 100%;
 }
 
-.game-field > div {
-    
-}
-
 .playground {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -269,10 +265,6 @@ a i {
     aspect-ratio: 1 / 1;
     border-radius: 10px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-}
-
-.playground > div {
-
 }
 
 .cell {
@@ -353,4 +345,99 @@ a i {
     color: black;
     font-size: 1.2rem;
 }
+
+
+/* NAME FORM */
+/* NAME FORM */
+/* NAME FORM */
+
+
+.name-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(196, 196, 196);
+    height: 350px;
+    width: 250px;
+    display: grid;
+    grid-template-rows: 1fr 3fr;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 10px;
+    /* transform: scale(0);
+    transform-origin: 0% 0% 0px; */
+}
+
+.heading-area {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 30px;
+}
+
+.heading-area h2 {
+    font-size: 1.3rem;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+}
+
+.form-area form {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 10px 0px;
+}
+
+.player1-name {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.player2-name {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 20px;
+    gap: 5px;
+}
+
+.player1-name input, .player2-name input {
+    height: 40px;
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 3px 8px;
+    font-size: 1rem;
+    border-radius: 10px;
+}
+
+form label {
+    font-family: 'Work Sans', sans-serif;
+}
+
+.submit-button {
+    margin-top: auto;
+}
+
+.submit-button button {
+    width: 150px;
+    height: 40px;
+    border-radius: 7px;
+    border: none;
+    font-family: 'Work Sans', sans-serif;
+    background-color: #91FF95;
+    margin-bottom: 10px;
+}
+
+.submit-button button:hover {
+    background-color: #61c464;
+    cursor: pointer;
+} 
 
