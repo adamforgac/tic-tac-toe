@@ -1,7 +1,7 @@
 // display module
 // display module
 // display module
-
+let playerOnePasive
 
 const displayUpdate = (() => {
     const manipuleForm = () => {
@@ -21,6 +21,8 @@ const displayUpdate = (() => {
                 const nameTwoValue = playerTwoInput.value;
                 document.querySelector(".profile1 p").textContent = nameOneValue;
                 document.querySelector(".profile2 p").textContent = nameTwoValue;
+                document.querySelector(".win-num1").textContent = 0;
+                document.querySelector(".win-num2").textContent = 0;
                 const playerOne = Player("X", "active");
                 const playerTwo = Player("O", "pasive");
                 displayController.filterPlayer(playerOne, playerTwo);
@@ -29,13 +31,82 @@ const displayUpdate = (() => {
         })
     };
 
+    const playerOneWins = () => {
+        document.querySelector("body").style.overflow = "hidden";
+        document.querySelector(".win-name").textContent = document.querySelector(".profile1 p").textContent;
+        document.querySelector(".mark").textContent = "X";
+        document.querySelector(".winning-banner").classList.add("active");
+
+        // ADDS POINT TO PLAYER NUMBER 1
+
+        const numStat = Number(document.querySelector(".win-num1").textContent);
+        const numStatTotal = numStat + 1;
+        document.querySelector(".win-num1").textContent = numStatTotal;
+
+        // ADDS ROUND NUMBER
+
+        const numStat2 = Number(document.querySelector(".score-number").textContent);
+        const numStatTotal2 = numStat2 + 1;
+        document.querySelector(".score-number").textContent = numStatTotal2;
+
+        // ADDS POINT TO SCORE
+
+        const numStat3 = Number(document.querySelector(".number1").textContent);
+        const numStatTotal3 = numStat3 + 1;
+        document.querySelector(".number1").textContent = numStatTotal3;
+
+        playerOnePasive = true;
+        nextRound();
+    }
+
+    const playerTwoWins = () => {
+        document.querySelector("body").style.overflow = "hidden";
+        document.querySelector(".win-name").textContent = document.querySelector(".profile2 p").textContent;
+        document.querySelector(".mark").textContent = "O";
+        document.querySelector(".winning-banner").classList.add("active");
+
+        // ADDS POINT TO PLAYER NUMBER 2
+
+        const numStat4 = Number(document.querySelector(".win-num2").textContent);
+        const numStatTotal4 = numStat4 + 1;
+        document.querySelector(".win-num2").textContent = numStatTotal4;
+            
+        // ADDS ROUND NUMBER
+
+        const numStat6 = Number(document.querySelector(".score-number").textContent);
+        const numStatTotal6 = numStat6 + 1;
+        document.querySelector(".score-number").textContent = numStatTotal6;
+            
+        // ADDS POINT TO SCORE
+
+        const numStat5 = Number(document.querySelector(".number2").textContent);
+        const numStatTotal5 = numStat5 + 1;
+        document.querySelector(".number2").textContent = numStatTotal5;
+
+        playerOnePasive = false;
+        nextRound();
+    }
+
+    const nextRound = () => {
+        document.querySelector(".next-round button").addEventListener("click", (event) => {
+            document.querySelector("body").style.overflow = "visible";
+            console.log("ůalkdfjůaslkdf")
+            document.querySelector(".winning-banner").classList.remove("active");
+
+            // CLEARS THE GAMEBOARD
+
+            gameBoard.cleanPlan();
+            event.stopImmediatePropagation();
+        })
+    }
+
     const restartStats = () => {
         document.querySelector(".number1").textContent = 0;
         document.querySelector(".number2").textContent = 0;
         document.querySelector(".score-number").textContent = 1;
     }
 
-    return {manipuleForm};
+    return {manipuleForm, playerOneWins, playerTwoWins};
 })()
 
 displayUpdate.manipuleForm();
@@ -55,14 +126,26 @@ const gameBoard = (() => {
             false;
         } else {
             gamePlan[num] = mark;
-            console.log(gamePlan);
+
             for(let i = 0; i <= gamePlan.length-1; i++) {
                 const playGround = document.querySelector(".playground");
                 playGround.querySelector(`[data-attribute="${i}"]`).textContent = gamePlan[i];
             }
-            checkForWin();
         }
     }
+
+    const cleanPlan = () => {
+        for(let i = 0; i <= gamePlan.length-1; i++) {
+                const allCells = document.querySelectorAll(".cell");
+
+                allCells.forEach(cell => {
+                    cell.textContent = "";
+                })
+
+                gamePlan[i] = "";
+            }
+        }
+    
 
     const checkForWin = () => {
         if(
@@ -75,7 +158,7 @@ const gameBoard = (() => {
             (gamePlan[0] === "X" && gamePlan[4] === "X" && gamePlan[8] === "X") ||
             (gamePlan[2] === "X" && gamePlan[4] === "X" && gamePlan[6] === "X")
         ) {
-            console.log("win X")
+            displayUpdate.playerOneWins();
         } else if(
             (gamePlan[0] === "O" && gamePlan[1] === "O" && gamePlan[2] === "O") ||
             (gamePlan[3] === "O" && gamePlan[4] === "O" && gamePlan[5] === "O") ||
@@ -86,10 +169,10 @@ const gameBoard = (() => {
             (gamePlan[0] === "O" && gamePlan[4] === "O" && gamePlan[8] === "O") ||
             (gamePlan[2] === "O" && gamePlan[4] === "O" && gamePlan[6] === "O")
         ) {
-            console.log("win O")
+            displayUpdate.playerTwoWins();
         }
     }
-    return {getCell, gamePlan};
+    return {getCell, gamePlan, checkForWin, cleanPlan};
 })()
 
 
@@ -99,26 +182,37 @@ const gameBoard = (() => {
 const Player = (mark, activity) => {
     const getMark = () => mark;
     const getActivity = () => activity;
-
     const playGame = (player1, player2) => {
         const allCells = document.querySelectorAll(".cell");
-        let playerOnePasive = false;
         allCells.forEach(cell => {
         cell.addEventListener("click", (event) => {
-                if(playerOnePasive) {
-                    const cellNumber = Number(cell.getAttribute("data-attribute"));
+            if(playerOnePasive) {
+                const cellNumber = Number(cell.getAttribute("data-attribute"));
+                if(gameBoard.gamePlan[cellNumber] !== "X" && gameBoard.gamePlan[cellNumber] !== "O") {
                     gameBoard.getCell(cellNumber, player2.getMark());
                     playerOnePasive = false;
-                } else  {
-                    const cellNumber = Number(cell.getAttribute("data-attribute"));
+                    gameBoard.checkForWin();
+                    console.log("correct")
+                } else if(gameBoard.gamePlan[cellNumber] === "X" && gameBoard.gamePlan[cellNumber] === "O") {
+                    false;
+                    console.log("does not work")
+                }
+            } else  {
+                const cellNumber = Number(cell.getAttribute("data-attribute"));
+                if(gameBoard.gamePlan[cellNumber] !== "X" && gameBoard.gamePlan[cellNumber] !== "O") {
                     gameBoard.getCell(cellNumber, player1.getMark());
                     playerOnePasive = true;
+                    gameBoard.checkForWin();
+                    console.log("correct")
+                }  else if(gameBoard.gamePlan[cellNumber] === "X" && gameBoard.gamePlan[cellNumber] === "O") {
+                    console.log("does not work")
                 }
+            }
             })
         })  
     }
 
-    return {playGame, getMark, getActivity};
+    return {playGame, getMark, getActivity, playerOnePasive};
 }
 
 const displayController = (() => {
@@ -132,6 +226,3 @@ const displayController = (() => {
 
 
 
-
-
-// JEŠTĚ ZKUSIT NASTAVIT NĚJAKOU VAR, KTERÁ SE BUDE MĚNIT NA TRUE A FALSE PODLE TOHO KDO HRAJE A PAK PODLE TOHO BUDE NASTAVENÁ TA PODMÍNKA

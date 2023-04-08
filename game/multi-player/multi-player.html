@@ -8,11 +8,29 @@
     <link rel="stylesheet" href="multi-player-queries.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/e4b054a4b4.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/e4b054a4b4.js" 
+    crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <title>tic tac toe</title>
 </head>
 <body>
     <div class="wrapper">
+        <div class="winning-banner">
+            <div class="announcement">
+                <h2><span class="win-name">PLAYER 1</span><br>WON (<span class="mark">X</span>)</h2>
+            </div>
+
+            <div class="option-buttons">
+                <div class="next-round">
+                    <button>NEXT ROUND</button>
+                </div>
+    
+                <div class="main-menu">
+                    <a href="/pre-game/pregame.html"><button>BACK TO MENU</button></a>
+                </div>
+            </div>
+        </div>
+
         <div class="top-banner">
             <div class="home">
                 <a href="/pre-game/pregame.html"><i class="fa-solid fa-house"></i></a>
@@ -35,7 +53,7 @@
             </div>
 
             <div class="wins1">
-                <p>WIN<br>2</p>
+                <p>WIN<br><span class="win-num1">0</span></p>
             </div>
         </div>
 
@@ -86,7 +104,7 @@
 
         <div class="player2-banner">
             <div class="wins2">
-                <p>WIN<br>1</p>
+                <p>WIN<br><span class="win-num2">0</span></p>
             </div>
 
             <div class="profile2">
