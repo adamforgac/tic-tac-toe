@@ -87,17 +87,42 @@ const displayUpdate = (() => {
         nextRound();
     }
 
+    const tie = () => {
+        const numStat6 = Number(document.querySelector(".score-number").textContent);
+        const numStatTotal6 = numStat6 + 1;
+        document.querySelector(".score-number").textContent = numStatTotal6;
+
+        document.querySelector("body").style.overflow = "hidden";
+        document.querySelector(".tie-banner").classList.add("active");
+
+        playerOnePasive = false;
+        nextRound();
+    }
+
     const nextRound = () => {
         document.querySelector(".next-round button").addEventListener("click", (event) => {
             document.querySelector("body").style.overflow = "visible";
-            console.log("ůalkdfjůaslkdf")
             document.querySelector(".winning-banner").classList.remove("active");
-
+    
             // CLEARS THE GAMEBOARD
 
             gameBoard.cleanPlan();
             event.stopImmediatePropagation();
         })
+
+        document.querySelector(".next-round-tie button").addEventListener("click", (event) => {
+            document.querySelector("body").style.overflow = "visible";
+            document.querySelector(".tie-banner").classList.remove("active");
+    
+            // CLEARS THE GAMEBOARD
+
+            gameBoard.cleanPlan();
+            event.stopImmediatePropagation();
+        })
+
+        // ABLE TO CLICK AGAIN
+
+        document.querySelector(".playground").classList.remove("pause");
     }
 
     const restartStats = () => {
@@ -106,7 +131,7 @@ const displayUpdate = (() => {
         document.querySelector(".score-number").textContent = 1;
     }
 
-    return {manipuleForm, playerOneWins, playerTwoWins};
+    return {manipuleForm, playerOneWins, playerTwoWins, tie};
 })()
 
 displayUpdate.manipuleForm();
@@ -145,6 +170,13 @@ const gameBoard = (() => {
                 gamePlan[i] = "";
             }
         }
+
+    const checkForTie = () => {
+        if(gameBoard.gamePlan.indexOf("") === -1) {
+            document.querySelector(".playground").classList.add("pause");
+            setTimeout(function() { displayUpdate.tie(); }, 100);
+        }
+    }
     
 
     const checkForWin = () => {
@@ -158,6 +190,7 @@ const gameBoard = (() => {
             (gamePlan[0] === "X" && gamePlan[4] === "X" && gamePlan[8] === "X") ||
             (gamePlan[2] === "X" && gamePlan[4] === "X" && gamePlan[6] === "X")
         ) {
+            document.querySelector(".playground").classList.add("pause");
             setTimeout(function() { displayUpdate.playerOneWins(); }, 100);
         } else if(
             (gamePlan[0] === "O" && gamePlan[1] === "O" && gamePlan[2] === "O") ||
@@ -169,10 +202,12 @@ const gameBoard = (() => {
             (gamePlan[0] === "O" && gamePlan[4] === "O" && gamePlan[8] === "O") ||
             (gamePlan[2] === "O" && gamePlan[4] === "O" && gamePlan[6] === "O")
         ) {
+            document.querySelector(".playground").classList.add("pause");
+            console.log("what2");
             setTimeout(function() { displayUpdate.playerTwoWins(); }, 100);
         }
     }
-    return {getCell, gamePlan, checkForWin, cleanPlan};
+    return {getCell, gamePlan, checkForWin, cleanPlan, checkForTie};
 })()
 
 
@@ -195,6 +230,7 @@ const Players = (mark, activity) => {
                         gameBoard.getCell(cellNumber, "X");
                         playerOnePasive = true;
                         gameBoard.checkForWin();
+                        gameBoard.checkForTie();
                         playBot();
                     }  else if(gameBoard.gamePlan[cellNumber] === "X" && gameBoard.gamePlan[cellNumber] === "O") {
                         false;
@@ -213,43 +249,26 @@ const Players = (mark, activity) => {
 
             if((gameBoard.gamePlan[4] !== "X" && count.X === 1) && (gameBoard.gamePlan[4] !== "O" && count.X === 1)) {
                 currectCell = 4;
-                console.log("start1");
             } else if((gameBoard.gamePlan[4] === "X" && count.X === 1) || (gameBoard.gamePlan[4] === "O" && count.X === 1))  {
-                let randomNumber = Math.random() * 9;
-                let wholeRandomNumber = Math.floor(randomNumber);
-                console.log(wholeRandomNumber);
-                if(wholeRandomNumber === 4) {
-                    wholeRandomNumber-1;
-                }
-                currectCell = wholeRandomNumber;
-                console.log("start2");
+                currectCell = 0;
             } else if((((gameBoard.gamePlan[3] === "X") && (gameBoard.gamePlan[6] === "X")) || ((gameBoard.gamePlan[4] === "X") && (gameBoard.gamePlan[8] === "X")) || ((gameBoard.gamePlan[1] === "X") && (gameBoard.gamePlan[2] === "X"))) && (gameBoard.gamePlan[0] === "")) {
                 currectCell = 0;
-                console.log("0");
             } else if((((gameBoard.gamePlan[4] === "X") && (gameBoard.gamePlan[7] === "X")) || ((gameBoard.gamePlan[0] === "X") && (gameBoard.gamePlan[2] === "X"))) && (gameBoard.gamePlan[1] === "")) {
                 currectCell = 1;
-                console.log("1");
             } else if((((gameBoard.gamePlan[0] === "X") && (gameBoard.gamePlan[1] === "X")) || ((gameBoard.gamePlan[6] === "X") && (gameBoard.gamePlan[4] === "X")) || ((gameBoard.gamePlan[5] === "X") && (gameBoard.gamePlan[8] === "X"))) && (gameBoard.gamePlan[2] === "")) {
                 currectCell = 2;
-                console.log("2");
             } else if((((gameBoard.gamePlan[0] === "X") && (gameBoard.gamePlan[6] === "X")) || ((gameBoard.gamePlan[4] === "X") && (gameBoard.gamePlan[5] === "X"))) && (gameBoard.gamePlan[3] === "")) {
                 currectCell = 3;
-                console.log("3");
             } else if((((gameBoard.gamePlan[1] === "X") && (gameBoard.gamePlan[7] === "X")) || ((gameBoard.gamePlan[2] === "X") && (gameBoard.gamePlan[6] === "X")) || ((gameBoard.gamePlan[5] === "X") && (gameBoard.gamePlan[3] === "X")) || ((gameBoard.gamePlan[8] === "X") && (gameBoard.gamePlan[0] === "X"))) && (gameBoard.gamePlan[4] === "")) {
                 currectCell = 4;
-                console.log("4");
             } else if((((gameBoard.gamePlan[2] === "X") && (gameBoard.gamePlan[8] === "X")) || ((gameBoard.gamePlan[3] === "X") && (gameBoard.gamePlan[4] === "X"))) && (gameBoard.gamePlan[5] === "")) {
                 currectCell = 5;
-                console.log("5");
             } else if((((gameBoard.gamePlan[0] === "X") && (gameBoard.gamePlan[3] === "X")) || ((gameBoard.gamePlan[4] === "X") && (gameBoard.gamePlan[2] === "X")) || ((gameBoard.gamePlan[7] === "X") && (gameBoard.gamePlan[8] === "X"))) && (gameBoard.gamePlan[6] === "")) {
                 currectCell = 6;
-                console.log("6");
             } else if((((gameBoard.gamePlan[1] === "X") && (gameBoard.gamePlan[4] === "X")) || ((gameBoard.gamePlan[6] === "X") && (gameBoard.gamePlan[8] === "X"))) && (gameBoard.gamePlan[7] === "")) {
                 currectCell = 7;
-                console.log("7");
             } else if((((gameBoard.gamePlan[2] === "X") && (gameBoard.gamePlan[5] === "X")) || ((gameBoard.gamePlan[6] === "X") && (gameBoard.gamePlan[7] === "X")) || ((gameBoard.gamePlan[0] === "X") && (gameBoard.gamePlan[4] === "X"))) && (gameBoard.gamePlan[8] === "")) {
                 currectCell = 8;
-                console.log("8");
             } else if((gameBoard.gamePlan[1] === "X" && gameBoard.gamePlan[3] === "X") && (gameBoard.gamePlan[0] === "")) {
                 currectCell = 0;
             } else if((gameBoard.gamePlan[1] === "X" && gameBoard.gamePlan[5] === "X") && (gameBoard.gamePlan[2] === "")) {
@@ -261,39 +280,42 @@ const Players = (mark, activity) => {
 
             } else if(((gameBoard.gamePlan[0] === "O" && gameBoard.gamePlan[1] === "O") || (gameBoard.gamePlan[6] === "O" && gameBoard.gamePlan[4] === "O") || (gameBoard.gamePlan[5] === "O" && gameBoard.gamePlan[8] === "O")) && (gameBoard.gamePlan[2] === "")) {
                 currectCell = 2;
-                console.log("attacking2")
             } else if(((gameBoard.gamePlan[1] === "O" && gameBoard.gamePlan[2] === "O") || (gameBoard.gamePlan[3] === "O" && gameBoard.gamePlan[6] === "O") || (gameBoard.gamePlan[4] === "O" && gameBoard.gamePlan[8] === "O")) && (gameBoard.gamePlan[0] === "")) {
                 currectCell = 0;
-                console.log("attacking0")
             } else if(((gameBoard.gamePlan[0] === "O" && gameBoard.gamePlan[3] === "O") || (gameBoard.gamePlan[2] === "O" && gameBoard.gamePlan[4] === "O") || (gameBoard.gamePlan[7] === "O" && gameBoard.gamePlan[8] === "O")) && (gameBoard.gamePlan[6] === "")) {
                 currectCell = 6;
-                console.log("attacking6")
             } else if(((gameBoard.gamePlan[2] === "O" && gameBoard.gamePlan[5] === "O") || (gameBoard.gamePlan[0] === "O" && gameBoard.gamePlan[4] === "O") || (gameBoard.gamePlan[6] === "O" && gameBoard.gamePlan[7] === "O")) && (gameBoard.gamePlan[8] === "")) {
                 currectCell = 8;
-                console.log("attacking8")
             } else if(((gameBoard.gamePlan[0] === "0" && gameBoard.gamePlan[2]) || (gameBoard.gamePlan[4] === "0" && gameBoard.gamePlan[7])) && (gameBoard.gamePlan[1] === "")) {
                 currectCell = 1;
-                console.log("attacking1")
             } else if(((gameBoard.gamePlan[2] === "0" && gameBoard.gamePlan[8]) || (gameBoard.gamePlan[3] === "0" && gameBoard.gamePlan[4])) && (gameBoard.gamePlan[5] === "")) {
                 currectCell = 5;
-                console.log("attacking5")
             } else if(((gameBoard.gamePlan[1] === "0" && gameBoard.gamePlan[4]) || (gameBoard.gamePlan[6] === "0" && gameBoard.gamePlan[8])) && (gameBoard.gamePlan[7] === "")) {
                 currectCell = 7;
-                console.log("attacking7")
             } else if(((gameBoard.gamePlan[0] === "0" && gameBoard.gamePlan[6]) || (gameBoard.gamePlan[4] === "0" && gameBoard.gamePlan[5])) && (gameBoard.gamePlan[3] === "")) {
                 currectCell = 3;
-                console.log("attacking3")
             } else if(((gameBoard.gamePlan[1] === "0" && gameBoard.gamePlan[7]) || (gameBoard.gamePlan[3] === "0" && gameBoard.gamePlan[5]) || (gameBoard.gamePlan[2] === "0" && gameBoard.gamePlan[6]) || (gameBoard.gamePlan[0] === "0" && gameBoard.gamePlan[8])) && (gameBoard.gamePlan[4] === "")) {
                 currectCell = 4;
-                console.log("attacking4")
-            } else {
+            } else if(gameBoard.gamePlan[gameBoard.gamePlan.indexOf("O") + 1] > 0 && gameBoard.gamePlan[gameBoard.gamePlan.indexOf("O") + 1] < 8 && gameBoard.gamePlan[gameBoard.gamePlan.indexOf("O") + 1] === "") {
                 const index = gameBoard.gamePlan.indexOf("O"); 
                 currectCell = index+1;
                 console.log("+1")
-                if(gameBoard.gamePlan[currectCell] < 0 || gameBoard.gamePlan[currectCell] > 8 || gameBoard.gamePlan[currectCell] !== "") {
-                    const random = gameBoard.gamePlan.indexOf("");
-                    currectCell = random;
-                }  
+            } else if(gameBoard.gamePlan[gameBoard.gamePlan.indexOf("O") + 3] > 0 && gameBoard.gamePlan[gameBoard.gamePlan.indexOf("O") + 3] < 8 && gameBoard.gamePlan[gameBoard.gamePlan.indexOf("O") + 3] === "") {
+                const index2 = gameBoard.gamePlan.indexOf("O"); 
+                currectCell = index2+3;
+                console.log("+3")
+            } else if(gameBoard.gamePlan[gameBoard.gamePlan.indexOf("X")] === "" && gameBoard.gamePlan[gameBoard.gamePlan.indexOf("X")] > -1 && gameBoard.gamePlan[gameBoard.gamePlan.indexOf("X")] < 0) {
+                const index3 = gameBoard.gamePlan.indexOf("X");
+                currectCell = index3+3;
+                console.log("random");
+            } else if((gameBoard.gamePlan[2] === "X" && gameBoard.gamePlan[6] === "X") && (gameBoard.gamePlan[8] === "")) {
+                currectCell = 8
+            } else if((gameBoard.gamePlan[0] === "X" && gameBoard.gamePlan[8] === "X") && (gameBoard.gamePlan[6] === "")) {
+                currectCell = 6;
+            } else {
+                const random = gameBoard.gamePlan.indexOf("");
+                currectCell = random;
+                console.log("real-random");
             }
           
 
