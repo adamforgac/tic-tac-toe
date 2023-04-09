@@ -24,10 +24,15 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
+html {
+    height: -webkit-fill-available;
+}
+
 body {
 	line-height: 1;
     background-color: var(--web-cream);
     height: 100vh;
+    height: -webkit-fill-available;
 }   
 
 * {
@@ -87,6 +92,65 @@ table {
 /* TOP-BANNER */
 /* TOP-BANNER */
 /* TOP-BANNER */
+
+.winning-banner {
+    width: 100vw;
+    height: 100vh;
+    z-index: 200;
+    background-color: rgba(0, 0, 0, 0.97);
+    position: fixed;
+    top: -200%;
+    display: grid;
+    grid-template-columns: 1;
+    grid-template-rows: 5fr 1fr;
+    transition: 1s;
+}
+
+.winning-banner.active {
+    top: 0%;
+    transition: 1s;
+    height: 100vh;
+}
+
+.announcement {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.announcement h2 {
+    font-size: 15rem;
+    font-family: 'Bebas Neue', cursive;
+    color: rgb(128, 129, 131);
+}
+
+.option-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.winning-banner button {
+    height: 100%;
+    width: 100%;
+    border: none;
+    font-size: 2rem;
+    font-family: 'Bebas Neue', cursive;
+    color: black;
+}
+
+.winning-banner button a {
+    text-decoration: none;
+    color: black;
+}
+
+.next-round button {
+    border-right: 2px solid black;
+    background-color: #91FF95;
+}
+
+.main-menu button {
+    background-color: #fa8989;
+}
 
 
 .top-banner {
@@ -268,7 +332,12 @@ a i {
 }
 
 .cell {
-    border: 1px solid var(--web-grey)
+    border: 1px solid var(--web-grey);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .top {
@@ -356,7 +425,7 @@ a i {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0);
     background-color: rgb(196, 196, 196);
     height: 350px;
     width: 250px;
@@ -364,8 +433,12 @@ a i {
     grid-template-rows: 1fr 3fr;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     border-radius: 10px;
-    /* transform: scale(0);
-    transform-origin: 0% 0% 0px; */
+    transition: 1s;
+}
+
+.name-form.appear {
+    transform: translate(-50%, -50%) scale(1);
+    transition: 1s;
 }
 
 .heading-area {
@@ -434,6 +507,7 @@ form label {
     font-family: 'Work Sans', sans-serif;
     background-color: #91FF95;
     margin-bottom: 10px;
+    color: black;
 }
 
 .submit-button button:hover {
