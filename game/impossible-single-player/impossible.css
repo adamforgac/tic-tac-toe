@@ -165,10 +165,24 @@ table {
 .next-round button, .next-round-tie button {
     border-right: 2px solid black;
     background-color: #91FF95;
+    transition: 0.1s;
+}
+
+.next-round button:hover, .next-round-tie button:hover {
+    background-color: #64ee68;
+    transition: 0.1s;
+    cursor: pointer;
 }
 
 .main-menu button, .main-menu-tie button {
     background-color: #fa8989;
+    transition: 0.1s;
+}
+
+.main-menu button:hover, .main-menu-tie button:hover {
+    background-color: #f76868;
+    cursor: pointer;
+    transition: 0.1s;
 }
 
 
@@ -347,6 +361,7 @@ a i {
     height: 100%;
     aspect-ratio: 1 / 1;
     border-radius: 10px;
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; */
     pointer-events: auto;
 }
 
@@ -361,6 +376,11 @@ a i {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 0.1s;
+}
+
+.cell:hover {
+    background-color: #dbdbdb;
 }
 
 .top {

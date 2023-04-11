@@ -161,15 +161,15 @@ const gameBoard = (() => {
 
     const cleanPlan = () => {
         for(let i = 0; i <= gamePlan.length-1; i++) {
-                const allCells = document.querySelectorAll(".cell");
+            const allCells = document.querySelectorAll(".cell");
 
-                allCells.forEach(cell => {
-                    cell.textContent = "";
-                })
+            allCells.forEach(cell => {
+                cell.textContent = "";
+            })
 
-                gamePlan[i] = "";
-            }
+            gamePlan[i] = "";
         }
+    }
 
     const checkForTie = () => {
         if(gameBoard.gamePlan.indexOf("") === -1) {
@@ -203,7 +203,6 @@ const gameBoard = (() => {
             (gamePlan[2] === "O" && gamePlan[4] === "O" && gamePlan[6] === "O")
         ) {
             document.querySelector(".playground").classList.add("pause");
-            console.log("what2");
             setTimeout(function() { displayUpdate.playerTwoWins(); }, 100);
         }
     }
@@ -299,15 +298,12 @@ const Players = (mark, activity) => {
             } else if(gameBoard.gamePlan[gameBoard.gamePlan.indexOf("O") + 1] > 0 && gameBoard.gamePlan[gameBoard.gamePlan.indexOf("O") + 1] < 8 && gameBoard.gamePlan[gameBoard.gamePlan.indexOf("O") + 1] === "") {
                 const index = gameBoard.gamePlan.indexOf("O"); 
                 currectCell = index+1;
-                console.log("+1")
             } else if(gameBoard.gamePlan[gameBoard.gamePlan.indexOf("O") + 3] > 0 && gameBoard.gamePlan[gameBoard.gamePlan.indexOf("O") + 3] < 8 && gameBoard.gamePlan[gameBoard.gamePlan.indexOf("O") + 3] === "") {
                 const index2 = gameBoard.gamePlan.indexOf("O"); 
                 currectCell = index2+3;
-                console.log("+3")
             } else if(gameBoard.gamePlan[gameBoard.gamePlan.indexOf("X")] === "" && gameBoard.gamePlan[gameBoard.gamePlan.indexOf("X")] > -1 && gameBoard.gamePlan[gameBoard.gamePlan.indexOf("X")] < 0) {
                 const index3 = gameBoard.gamePlan.indexOf("X");
                 currectCell = index3+3;
-                console.log("random");
             } else if((gameBoard.gamePlan[2] === "X" && gameBoard.gamePlan[6] === "X") && (gameBoard.gamePlan[8] === "")) {
                 currectCell = 8
             } else if((gameBoard.gamePlan[0] === "X" && gameBoard.gamePlan[8] === "X") && (gameBoard.gamePlan[6] === "")) {
@@ -315,7 +311,6 @@ const Players = (mark, activity) => {
             } else {
                 const random = gameBoard.gamePlan.indexOf("");
                 currectCell = random;
-                console.log("real-random");
             }
           
 
