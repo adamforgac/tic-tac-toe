@@ -1,3 +1,16 @@
+@media (hover: hover) {
+    button:hover {
+        border: 2px solid var(--web-red);
+        cursor: pointer;
+        transition: 0.1s;
+    }
+    
+    .exit:hover {
+        border: 2px solid var(--web-red);
+        transition: 0.1s;
+    }
+}
+
 @media only screen and (max-width: 1270px) {
     .heading img {
         width: 270px;
@@ -105,9 +118,10 @@
 @media only screen and (max-width: 500px) {
     .heading img {
         display: unset;
-        width: 150px;
-        top: 53%;
-        left: 30%;
+        width: 110px;
+        top: 58%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
     .button-options {

@@ -165,12 +165,13 @@ table {
 .next-round button, .next-round-tie button {
     border-right: 2px solid black;
     background-color: #91FF95;
+    transition: 0.1s;
 }
 
 .main-menu button, .main-menu-tie button {
     background-color: #fa8989;
+    transition: 0.1s;
 }
-
 
 .top-banner {
     display: flex;
@@ -361,6 +362,7 @@ a i {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 0.1s;
 }
 
 .top {
@@ -457,6 +459,7 @@ a i {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     border-radius: 10px;
     transition: 1s;
+
 }
 
 .name-form.appear {
@@ -480,7 +483,6 @@ a i {
 .form-area form {
     display: flex;
     justify-content: flex-start;
-    gap: 20px;
     align-items: center;
     flex-direction: column;
     height: 100%;
@@ -491,9 +493,9 @@ a i {
 .player1-name {
     display: flex;
     flex-direction: column;
-    gap: 5px;
     width: 100%;
     padding: 0 20px;
+    margin-bottom: 20px;
 }
 
 .player2-name {
@@ -501,7 +503,6 @@ a i {
     flex-direction: column;
     width: 100%;
     padding: 0 20px;
-    gap: 5px;
 }
 
 .player1-name input, .player2-name input {
@@ -516,6 +517,7 @@ a i {
 
 form label {
     font-family: 'Work Sans', sans-serif;
+    margin-bottom: 5px;
 }
 
 .submit-button {
@@ -531,10 +533,6 @@ form label {
     background-color: #91FF95;
     margin-bottom: 10px;
     color: black;
+    transition: 0.1s;
 }
-
-.submit-button button:hover {
-    background-color: #61c464;
-    cursor: pointer;
-} 
 

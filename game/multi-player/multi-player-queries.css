@@ -1,3 +1,32 @@
+@media (hover: hover) {
+    .next-round button:hover, .next-round-tie button:hover {
+        background-color: #64ee68;
+        transition: 0.1s;
+        cursor: pointer;
+    }
+
+    .main-menu button:hover, .main-menu-tie button:hover {
+        background-color: #f76868;
+        cursor: pointer;
+        transition: 0.1s;
+    }
+
+    .cell:hover {
+        background-color: #dbdbdb;
+        transition: 0.1s;
+    }
+
+    .submit-button button:hover {
+        background-color: #61c464;
+        cursor: pointer;
+        transition: 0.1s;
+    } 
+
+    
+
+
+}
+
 @media only screen and (max-width: 1300px) {
     .scam-area1 p, .scam-area2 p {
         font-size: 1.5rem;
@@ -128,18 +157,27 @@
 }
 
 @media only screen and (max-width: 700px) {
-    .announcement h2 {
+    .announcement h2, .announcement-tie h2 {
         font-size: 10rem;
+    }
+
+    .option-buttons, .option-buttons-tie {
+        margin-bottom: 70px;
+        height: 120px;
     }
 }
 
 @media only screen and (max-width: 420px) {
-    .announcement h2 {
+    .announcement h2, .announcement-tie h2 {
         font-size: 7rem;
     }
 
-    .winning-banner button {
+    .winning-banner button, .tie-banner button {
         font-size: 1.5rem;
+    }
+
+    .cell {
+        font-size: 4rem;
     }
 }
 
@@ -201,7 +239,7 @@
 }
 
 @media only screen and (max-width: 290px) {
-    .announcement h2 {
+    .announcement h2, .tie-announcement h2 {
         font-size: 4.5rem;
     }
 }

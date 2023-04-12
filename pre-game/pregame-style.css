@@ -82,14 +82,12 @@ table {
     height: 100%;
 }
 
-.wrapper > div {
-
-}
 
 
 /* LEFT-PART */
 /* LEFT-PART */
 /* LEFT-PART */
+
 
 
 /* HEADING */
@@ -115,9 +113,6 @@ table {
     margin-left: 16%;
     letter-spacing: 10px;
     font-family: 'Quicksand', sans-serif;
-}
-
-.left-part > div {
 }
 
 .dist1 {
@@ -186,10 +181,12 @@ button {
     background-color: var(--web-blue);
     font-size: 1.15rem;
     font-family: 'Work Sans', sans-serif;
+    transition: 0.1s;
 }
 
 .exit {
     background-color: var(--web-red);
+    transition: 0.1s;
 }
 
 .blue {
@@ -220,6 +217,14 @@ body {
 a {
     text-decoration: none;
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+
 }
 
 .heading img {
@@ -229,15 +234,3 @@ a {
     left: 35%;
     top: 20%;
 }
-
-button:hover {
-    border: 2px solid var(--web-red);
-    cursor: pointer;
-}
-
-.exit:hover {
-    border: 2px solid var(--web-red)
-}
-
-
-

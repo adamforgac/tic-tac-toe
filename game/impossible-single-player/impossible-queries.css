@@ -1,3 +1,28 @@
+@media (hover: hover) {
+    .next-round button:hover, .next-round-tie button:hover {
+        background-color: #64ee68;
+        transition: 0.1s;
+        cursor: pointer;
+    }
+
+    .main-menu button:hover, .main-menu-tie button:hover {
+        background-color: #f76868;
+        cursor: pointer;
+        transition: 0.1s;
+    }
+
+    .cell:hover {
+        background-color: #dbdbdb;
+        transition: 0.1s;
+    }
+
+    .submit-button button:hover {
+        background-color: #61c464;
+        cursor: pointer;
+        transition: 0.1s;
+    } 
+}
+
 @media only screen and (max-width: 1300px) {
     .scam-area1 p, .scam-area2 p {
         font-size: 1.5rem;

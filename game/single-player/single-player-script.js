@@ -108,6 +108,7 @@ const displayUpdate = (() => {
 
             gameBoard.cleanPlan();
             event.stopImmediatePropagation();
+            document.querySelector(".playground").classList.remove("pause");
         })
 
         document.querySelector(".next-round-tie button").addEventListener("click", (event) => {
@@ -118,11 +119,8 @@ const displayUpdate = (() => {
 
             gameBoard.cleanPlan();
             event.stopImmediatePropagation();
+            document.querySelector(".playground").classList.remove("pause");
         })
-
-        // ABLE TO CLICK AGAIN
-
-        document.querySelector(".playground").classList.remove("pause");
     }
 
     const restartStats = () => {
@@ -170,13 +168,6 @@ const gameBoard = (() => {
             gamePlan[i] = "";
         }
     }
-
-    const checkForTie = () => {
-        if(gameBoard.gamePlan.indexOf("") === -1) {
-            document.querySelector(".playground").classList.add("pause");
-            setTimeout(function() { displayUpdate.tie(); }, 100);
-        }
-    }
     
 
     const checkForWin = () => {
@@ -204,8 +195,20 @@ const gameBoard = (() => {
         ) {
             document.querySelector(".playground").classList.add("pause");
             setTimeout(function() { displayUpdate.playerTwoWins(); }, 100);
+        } else {
+            return false;
         }
     }
+
+    const checkForTie = () => {
+        if(gameBoard.gamePlan.indexOf("") === -1) {
+            document.querySelector(".playground").classList.add("pause");
+            setTimeout(function() { displayUpdate.tie(); }, 100);
+        } else {
+            return false;
+        }
+    }
+
     return {getCell, gamePlan, checkForWin, cleanPlan, checkForTie};
 })()
 
@@ -227,10 +230,12 @@ const Players = (mark, activity) => {
                     const cellNumber = Number(cell.getAttribute("data-attribute"));
                     if(gameBoard.gamePlan[cellNumber] !== "X" && gameBoard.gamePlan[cellNumber] !== "O") {
                         gameBoard.getCell(cellNumber, "X");
-                        playerOnePasive = true;
-                        gameBoard.checkForWin();
-                        gameBoard.checkForTie();
-                        playBot();
+                        if(gameBoard.checkForWin() == false) {
+                            if(gameBoard.checkForTie() == false) {
+                                playerOnePasive = true;
+                                playBot();
+                            }
+                        }
                     }  else if(gameBoard.gamePlan[cellNumber] === "X" && gameBoard.gamePlan[cellNumber] === "O") {
                         false;
                     }
@@ -316,11 +321,12 @@ const Players = (mark, activity) => {
 
     
 
-            if(playerOnePasive) {
+            if(playerOnePasive = true) {
                 if(gameBoard.gamePlan[currectCell] !== "X" && gameBoard.gamePlan[currectCell] !== "O") {
                     gameBoard.getCell(currectCell, "O");
-                    playerOnePasive = false;
                     gameBoard.checkForWin();
+                    playerOnePasive = false;
+            
                 } else if(gameBoard.gamePlan[currectCell] === "X" && gameBoard.gamePlan[currectCell] === "O") {
                     false;
                 }
