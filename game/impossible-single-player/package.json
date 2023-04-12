@@ -1,0 +1,21 @@
+{
+  "name": "impossible-single-player",
+  "version": "1.0.0",
+  "description": "",
+  "main": "impossible.js",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  
+  "eslintConfig": {
+    "extends": ["wesbos"]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "eslint-config-wesbos": "^3.2.3"
+  }
+}
