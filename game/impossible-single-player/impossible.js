@@ -14,10 +14,10 @@ const displayUpdate = (() => {
       const playerOneInput = document.querySelector('.player1-name input');
       const playerTwoInput = document.querySelector('.player2-name input');
       if (
-        playerOneInput.checkValidity() === false ||
-        playerOneInput.reportValidity() === false ||
-        playerTwoInput.checkValidity() === false ||
-        playerTwoInput.reportValidity() === false
+        playerOneInput.checkValidity() === false
+        || playerOneInput.reportValidity() === false
+        || playerTwoInput.checkValidity() === false
+        || playerTwoInput.reportValidity() === false
       ) {
         false;
       } else {
@@ -38,8 +38,7 @@ const displayUpdate = (() => {
 
   const playerOneWins = () => {
     document.querySelector('body').style.overflow = 'hidden';
-    document.querySelector('.win-name').textContent =
-      document.querySelector('.profile2 p').textContent;
+    document.querySelector('.win-name').textContent = document.querySelector('.profile2 p').textContent;
     document.querySelector('.mark').textContent = 'O';
     document.querySelector('.winning-banner').classList.add('active');
 
@@ -49,8 +48,7 @@ const displayUpdate = (() => {
 
   const playerTwoWins = () => {
     document.querySelector('body').style.overflow = 'hidden';
-    document.querySelector('.win-name').textContent =
-      document.querySelector('.profile1 p').textContent;
+    document.querySelector('.win-name').textContent = document.querySelector('.profile1 p').textContent;
     document.querySelector('.mark').textContent = 'X';
     document.querySelector('.winning-banner').classList.add('active');
 
@@ -63,7 +61,7 @@ const displayUpdate = (() => {
     // ADDS ROUND NUMBER
 
     const numStat6 = Number(
-      document.querySelector('.score-number').textContent
+      document.querySelector('.score-number').textContent,
     );
     const numStatTotal6 = numStat6 + 1;
     document.querySelector('.score-number').textContent = numStatTotal6;
@@ -80,7 +78,7 @@ const displayUpdate = (() => {
 
   const tie = () => {
     const numStat6 = Number(
-      document.querySelector('.score-number').textContent
+      document.querySelector('.score-number').textContent,
     );
     const numStatTotal6 = numStat6 + 1;
     document.querySelector('.score-number').textContent = numStatTotal6;
@@ -127,7 +125,9 @@ const displayUpdate = (() => {
     document.querySelector('.score-number').textContent = 1;
   };
 
-  return { manipuleForm, playerOneWins, playerTwoWins, tie };
+  return {
+    manipuleForm, playerOneWins, playerTwoWins, tie,
+  };
 })();
 
 displayUpdate.manipuleForm();
@@ -146,8 +146,7 @@ const gameBoard = (() => {
 
       for (let i = 0; i <= gamePlan.length - 1; i++) {
         const playGround = document.querySelector('.playground');
-        playGround.querySelector(`[data-attribute="${i}"]`).textContent =
-          gamePlan[i];
+        playGround.querySelector(`[data-attribute="${i}"]`).textContent = gamePlan[i];
       }
     }
   };
@@ -174,7 +173,9 @@ const gameBoard = (() => {
     [0, 4, 8],
     [6, 4, 2],
   ];
-  return { getCell, gamePlan, cleanPlan, winCombos };
+  return {
+    getCell, gamePlan, cleanPlan, winCombos,
+  };
 })();
 
 // player module
@@ -200,15 +201,13 @@ const Players = (mark, activity) => {
     function turnClick(spot) {
       if (typeof origBoard[spot] === 'number') {
         turn(spot, huPlayer);
-        if (!checkWin(origBoard, huPlayer) && !checkTie())
-          turn(bestSpot(), aiPlayer);
+        if (!checkWin(origBoard, huPlayer) && !checkTie()) { turn(bestSpot(), aiPlayer); }
       }
     }
 
     function turn(spot, player) {
       origBoard[spot] = player;
-      playGround.querySelector(`[data-attribute="${spot}"]`).textContent =
-        player;
+      playGround.querySelector(`[data-attribute="${spot}"]`).textContent = player;
       const gameWon = checkWin(origBoard, player);
       if (gameWon) {
         gameOver(gameWon);
@@ -217,7 +216,7 @@ const Players = (mark, activity) => {
         document.querySelector('.win-num1').textContent = numStatTotal;
 
         const numStat2 = Number(
-          document.querySelector('.score-number').textContent
+          document.querySelector('.score-number').textContent,
         );
         const numStatTotal2 = numStat2 + 1;
         document.querySelector('.score-number').textContent = numStatTotal2;
@@ -231,7 +230,7 @@ const Players = (mark, activity) => {
     function checkWin(board, player) {
       const plays = board.reduce(
         (a, e, i) => (e === player ? a.concat(i) : a),
-        []
+        [],
       );
       let gameWon = null;
       for (const [index, win] of winCombos.entries()) {
@@ -329,5 +328,7 @@ const Players = (mark, activity) => {
       return moves[bestMove];
     }
   };
-  return { playGame, getMark, getActivity, playerOnePasive };
+  return {
+    playGame, getMark, getActivity, playerOnePasive,
+  };
 };

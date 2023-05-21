@@ -14,10 +14,10 @@ const displayUpdate = (() => {
       const playerOneInput = document.querySelector('.player1-name input');
       const playerTwoInput = document.querySelector('.player2-name input');
       if (
-        playerOneInput.checkValidity() === false ||
-        playerOneInput.reportValidity() === false ||
-        playerTwoInput.checkValidity() === false ||
-        playerTwoInput.reportValidity() === false
+        playerOneInput.checkValidity() === false
+        || playerOneInput.reportValidity() === false
+        || playerTwoInput.checkValidity() === false
+        || playerTwoInput.reportValidity() === false
       ) {
         false;
       } else {
@@ -38,8 +38,7 @@ const displayUpdate = (() => {
 
   const playerOneWins = () => {
     document.querySelector('body').style.overflow = 'hidden';
-    document.querySelector('.win-name').textContent =
-      document.querySelector('.profile1 p').textContent;
+    document.querySelector('.win-name').textContent = document.querySelector('.profile1 p').textContent;
     document.querySelector('.mark').textContent = 'X';
     document.querySelector('.winning-banner').classList.add('active');
 
@@ -52,7 +51,7 @@ const displayUpdate = (() => {
     // ADDS ROUND NUMBER
 
     const numStat2 = Number(
-      document.querySelector('.score-number').textContent
+      document.querySelector('.score-number').textContent,
     );
     const numStatTotal2 = numStat2 + 1;
     document.querySelector('.score-number').textContent = numStatTotal2;
@@ -69,8 +68,7 @@ const displayUpdate = (() => {
 
   const playerTwoWins = () => {
     document.querySelector('body').style.overflow = 'hidden';
-    document.querySelector('.win-name').textContent =
-      document.querySelector('.profile2 p').textContent;
+    document.querySelector('.win-name').textContent = document.querySelector('.profile2 p').textContent;
     document.querySelector('.mark').textContent = 'O';
     document.querySelector('.winning-banner').classList.add('active');
 
@@ -83,7 +81,7 @@ const displayUpdate = (() => {
     // ADDS ROUND NUMBER
 
     const numStat6 = Number(
-      document.querySelector('.score-number').textContent
+      document.querySelector('.score-number').textContent,
     );
     const numStatTotal6 = numStat6 + 1;
     document.querySelector('.score-number').textContent = numStatTotal6;
@@ -100,7 +98,7 @@ const displayUpdate = (() => {
 
   const tie = () => {
     const numStat6 = Number(
-      document.querySelector('.score-number').textContent
+      document.querySelector('.score-number').textContent,
     );
     const numStatTotal6 = numStat6 + 1;
     document.querySelector('.score-number').textContent = numStatTotal6;
@@ -146,7 +144,9 @@ const displayUpdate = (() => {
     document.querySelector('.score-number').textContent = 1;
   };
 
-  return { manipuleForm, playerOneWins, playerTwoWins, tie };
+  return {
+    manipuleForm, playerOneWins, playerTwoWins, tie,
+  };
 })();
 
 displayUpdate.manipuleForm();
@@ -165,8 +165,7 @@ const gameBoard = (() => {
 
       for (let i = 0; i <= gamePlan.length - 1; i++) {
         const playGround = document.querySelector('.playground');
-        playGround.querySelector(`[data-attribute="${i}"]`).textContent =
-          gamePlan[i];
+        playGround.querySelector(`[data-attribute="${i}"]`).textContent = gamePlan[i];
       }
     }
   };
@@ -185,28 +184,28 @@ const gameBoard = (() => {
 
   const checkForWin = () => {
     if (
-      (gamePlan[0] === 'X' && gamePlan[1] === 'X' && gamePlan[2] === 'X') ||
-      (gamePlan[3] === 'X' && gamePlan[4] === 'X' && gamePlan[5] === 'X') ||
-      (gamePlan[6] === 'X' && gamePlan[7] === 'X' && gamePlan[8] === 'X') ||
-      (gamePlan[0] === 'X' && gamePlan[3] === 'X' && gamePlan[6] === 'X') ||
-      (gamePlan[1] === 'X' && gamePlan[4] === 'X' && gamePlan[7] === 'X') ||
-      (gamePlan[2] === 'X' && gamePlan[5] === 'X' && gamePlan[8] === 'X') ||
-      (gamePlan[0] === 'X' && gamePlan[4] === 'X' && gamePlan[8] === 'X') ||
-      (gamePlan[2] === 'X' && gamePlan[4] === 'X' && gamePlan[6] === 'X')
+      (gamePlan[0] === 'X' && gamePlan[1] === 'X' && gamePlan[2] === 'X')
+      || (gamePlan[3] === 'X' && gamePlan[4] === 'X' && gamePlan[5] === 'X')
+      || (gamePlan[6] === 'X' && gamePlan[7] === 'X' && gamePlan[8] === 'X')
+      || (gamePlan[0] === 'X' && gamePlan[3] === 'X' && gamePlan[6] === 'X')
+      || (gamePlan[1] === 'X' && gamePlan[4] === 'X' && gamePlan[7] === 'X')
+      || (gamePlan[2] === 'X' && gamePlan[5] === 'X' && gamePlan[8] === 'X')
+      || (gamePlan[0] === 'X' && gamePlan[4] === 'X' && gamePlan[8] === 'X')
+      || (gamePlan[2] === 'X' && gamePlan[4] === 'X' && gamePlan[6] === 'X')
     ) {
       document.querySelector('.playground').classList.add('pause');
       setTimeout(() => {
         displayUpdate.playerOneWins();
       }, 100);
     } else if (
-      (gamePlan[0] === 'O' && gamePlan[1] === 'O' && gamePlan[2] === 'O') ||
-      (gamePlan[3] === 'O' && gamePlan[4] === 'O' && gamePlan[5] === 'O') ||
-      (gamePlan[6] === 'O' && gamePlan[7] === 'O' && gamePlan[8] === 'O') ||
-      (gamePlan[0] === 'O' && gamePlan[3] === 'O' && gamePlan[6] === 'O') ||
-      (gamePlan[1] === 'O' && gamePlan[4] === 'O' && gamePlan[7] === 'O') ||
-      (gamePlan[2] === 'O' && gamePlan[5] === 'O' && gamePlan[8] === 'O') ||
-      (gamePlan[0] === 'O' && gamePlan[4] === 'O' && gamePlan[8] === 'O') ||
-      (gamePlan[2] === 'O' && gamePlan[4] === 'O' && gamePlan[6] === 'O')
+      (gamePlan[0] === 'O' && gamePlan[1] === 'O' && gamePlan[2] === 'O')
+      || (gamePlan[3] === 'O' && gamePlan[4] === 'O' && gamePlan[5] === 'O')
+      || (gamePlan[6] === 'O' && gamePlan[7] === 'O' && gamePlan[8] === 'O')
+      || (gamePlan[0] === 'O' && gamePlan[3] === 'O' && gamePlan[6] === 'O')
+      || (gamePlan[1] === 'O' && gamePlan[4] === 'O' && gamePlan[7] === 'O')
+      || (gamePlan[2] === 'O' && gamePlan[5] === 'O' && gamePlan[8] === 'O')
+      || (gamePlan[0] === 'O' && gamePlan[4] === 'O' && gamePlan[8] === 'O')
+      || (gamePlan[2] === 'O' && gamePlan[4] === 'O' && gamePlan[6] === 'O')
     ) {
       document.querySelector('.playground').classList.add('pause');
       setTimeout(() => {
@@ -228,7 +227,9 @@ const gameBoard = (() => {
     }
   };
 
-  return { getCell, gamePlan, checkForWin, cleanPlan, checkForTie };
+  return {
+    getCell, gamePlan, checkForWin, cleanPlan, checkForTie,
+  };
 })();
 
 // player module
@@ -244,8 +245,8 @@ const Players = (mark, activity) => {
         if (playerOnePasive === false) {
           const cellNumber = Number(cell.getAttribute('data-attribute'));
           if (
-            gameBoard.gamePlan[cellNumber] !== 'X' &&
-            gameBoard.gamePlan[cellNumber] !== 'O'
+            gameBoard.gamePlan[cellNumber] !== 'X'
+            && gameBoard.gamePlan[cellNumber] !== 'O'
           ) {
             gameBoard.getCell(cellNumber, 'X');
             if (gameBoard.checkForWin() == false) {
@@ -255,8 +256,8 @@ const Players = (mark, activity) => {
               }
             }
           } else if (
-            gameBoard.gamePlan[cellNumber] === 'X' &&
-            gameBoard.gamePlan[cellNumber] === 'O'
+            gameBoard.gamePlan[cellNumber] === 'X'
+            && gameBoard.gamePlan[cellNumber] === 'O'
           ) {
             false;
           }
@@ -273,192 +274,192 @@ const Players = (mark, activity) => {
       });
 
       if (
-        gameBoard.gamePlan[4] !== 'X' &&
-        count.X === 1 &&
-        gameBoard.gamePlan[4] !== 'O' &&
-        count.X === 1
+        gameBoard.gamePlan[4] !== 'X'
+        && count.X === 1
+        && gameBoard.gamePlan[4] !== 'O'
+        && count.X === 1
       ) {
         currectCell = 4;
       } else if (
-        (gameBoard.gamePlan[4] === 'X' && count.X === 1) ||
-        (gameBoard.gamePlan[4] === 'O' && count.X === 1)
+        (gameBoard.gamePlan[4] === 'X' && count.X === 1)
+        || (gameBoard.gamePlan[4] === 'O' && count.X === 1)
       ) {
         currectCell = 0;
       } else if (
-        ((gameBoard.gamePlan[3] === 'X' && gameBoard.gamePlan[6] === 'X') ||
-          (gameBoard.gamePlan[4] === 'X' && gameBoard.gamePlan[8] === 'X') ||
-          (gameBoard.gamePlan[1] === 'X' && gameBoard.gamePlan[2] === 'X')) &&
-        gameBoard.gamePlan[0] === ''
+        ((gameBoard.gamePlan[3] === 'X' && gameBoard.gamePlan[6] === 'X')
+          || (gameBoard.gamePlan[4] === 'X' && gameBoard.gamePlan[8] === 'X')
+          || (gameBoard.gamePlan[1] === 'X' && gameBoard.gamePlan[2] === 'X'))
+        && gameBoard.gamePlan[0] === ''
       ) {
         currectCell = 0;
       } else if (
-        ((gameBoard.gamePlan[4] === 'X' && gameBoard.gamePlan[7] === 'X') ||
-          (gameBoard.gamePlan[0] === 'X' && gameBoard.gamePlan[2] === 'X')) &&
-        gameBoard.gamePlan[1] === ''
+        ((gameBoard.gamePlan[4] === 'X' && gameBoard.gamePlan[7] === 'X')
+          || (gameBoard.gamePlan[0] === 'X' && gameBoard.gamePlan[2] === 'X'))
+        && gameBoard.gamePlan[1] === ''
       ) {
         currectCell = 1;
       } else if (
-        ((gameBoard.gamePlan[0] === 'X' && gameBoard.gamePlan[1] === 'X') ||
-          (gameBoard.gamePlan[6] === 'X' && gameBoard.gamePlan[4] === 'X') ||
-          (gameBoard.gamePlan[5] === 'X' && gameBoard.gamePlan[8] === 'X')) &&
-        gameBoard.gamePlan[2] === ''
+        ((gameBoard.gamePlan[0] === 'X' && gameBoard.gamePlan[1] === 'X')
+          || (gameBoard.gamePlan[6] === 'X' && gameBoard.gamePlan[4] === 'X')
+          || (gameBoard.gamePlan[5] === 'X' && gameBoard.gamePlan[8] === 'X'))
+        && gameBoard.gamePlan[2] === ''
       ) {
         currectCell = 2;
       } else if (
-        ((gameBoard.gamePlan[0] === 'X' && gameBoard.gamePlan[6] === 'X') ||
-          (gameBoard.gamePlan[4] === 'X' && gameBoard.gamePlan[5] === 'X')) &&
-        gameBoard.gamePlan[3] === ''
+        ((gameBoard.gamePlan[0] === 'X' && gameBoard.gamePlan[6] === 'X')
+          || (gameBoard.gamePlan[4] === 'X' && gameBoard.gamePlan[5] === 'X'))
+        && gameBoard.gamePlan[3] === ''
       ) {
         currectCell = 3;
       } else if (
-        ((gameBoard.gamePlan[1] === 'X' && gameBoard.gamePlan[7] === 'X') ||
-          (gameBoard.gamePlan[2] === 'X' && gameBoard.gamePlan[6] === 'X') ||
-          (gameBoard.gamePlan[5] === 'X' && gameBoard.gamePlan[3] === 'X') ||
-          (gameBoard.gamePlan[8] === 'X' && gameBoard.gamePlan[0] === 'X')) &&
-        gameBoard.gamePlan[4] === ''
+        ((gameBoard.gamePlan[1] === 'X' && gameBoard.gamePlan[7] === 'X')
+          || (gameBoard.gamePlan[2] === 'X' && gameBoard.gamePlan[6] === 'X')
+          || (gameBoard.gamePlan[5] === 'X' && gameBoard.gamePlan[3] === 'X')
+          || (gameBoard.gamePlan[8] === 'X' && gameBoard.gamePlan[0] === 'X'))
+        && gameBoard.gamePlan[4] === ''
       ) {
         currectCell = 4;
       } else if (
-        ((gameBoard.gamePlan[2] === 'X' && gameBoard.gamePlan[8] === 'X') ||
-          (gameBoard.gamePlan[3] === 'X' && gameBoard.gamePlan[4] === 'X')) &&
-        gameBoard.gamePlan[5] === ''
+        ((gameBoard.gamePlan[2] === 'X' && gameBoard.gamePlan[8] === 'X')
+          || (gameBoard.gamePlan[3] === 'X' && gameBoard.gamePlan[4] === 'X'))
+        && gameBoard.gamePlan[5] === ''
       ) {
         currectCell = 5;
       } else if (
-        ((gameBoard.gamePlan[0] === 'X' && gameBoard.gamePlan[3] === 'X') ||
-          (gameBoard.gamePlan[4] === 'X' && gameBoard.gamePlan[2] === 'X') ||
-          (gameBoard.gamePlan[7] === 'X' && gameBoard.gamePlan[8] === 'X')) &&
-        gameBoard.gamePlan[6] === ''
+        ((gameBoard.gamePlan[0] === 'X' && gameBoard.gamePlan[3] === 'X')
+          || (gameBoard.gamePlan[4] === 'X' && gameBoard.gamePlan[2] === 'X')
+          || (gameBoard.gamePlan[7] === 'X' && gameBoard.gamePlan[8] === 'X'))
+        && gameBoard.gamePlan[6] === ''
       ) {
         currectCell = 6;
       } else if (
-        ((gameBoard.gamePlan[1] === 'X' && gameBoard.gamePlan[4] === 'X') ||
-          (gameBoard.gamePlan[6] === 'X' && gameBoard.gamePlan[8] === 'X')) &&
-        gameBoard.gamePlan[7] === ''
+        ((gameBoard.gamePlan[1] === 'X' && gameBoard.gamePlan[4] === 'X')
+          || (gameBoard.gamePlan[6] === 'X' && gameBoard.gamePlan[8] === 'X'))
+        && gameBoard.gamePlan[7] === ''
       ) {
         currectCell = 7;
       } else if (
-        ((gameBoard.gamePlan[2] === 'X' && gameBoard.gamePlan[5] === 'X') ||
-          (gameBoard.gamePlan[6] === 'X' && gameBoard.gamePlan[7] === 'X') ||
-          (gameBoard.gamePlan[0] === 'X' && gameBoard.gamePlan[4] === 'X')) &&
-        gameBoard.gamePlan[8] === ''
+        ((gameBoard.gamePlan[2] === 'X' && gameBoard.gamePlan[5] === 'X')
+          || (gameBoard.gamePlan[6] === 'X' && gameBoard.gamePlan[7] === 'X')
+          || (gameBoard.gamePlan[0] === 'X' && gameBoard.gamePlan[4] === 'X'))
+        && gameBoard.gamePlan[8] === ''
       ) {
         currectCell = 8;
       } else if (
-        gameBoard.gamePlan[1] === 'X' &&
-        gameBoard.gamePlan[3] === 'X' &&
-        gameBoard.gamePlan[0] === ''
+        gameBoard.gamePlan[1] === 'X'
+        && gameBoard.gamePlan[3] === 'X'
+        && gameBoard.gamePlan[0] === ''
       ) {
         currectCell = 0;
       } else if (
-        gameBoard.gamePlan[1] === 'X' &&
-        gameBoard.gamePlan[5] === 'X' &&
-        gameBoard.gamePlan[2] === ''
+        gameBoard.gamePlan[1] === 'X'
+        && gameBoard.gamePlan[5] === 'X'
+        && gameBoard.gamePlan[2] === ''
       ) {
         currectCell = 2;
       } else if (
-        gameBoard.gamePlan[5] === 'X' &&
-        gameBoard.gamePlan[7] === 'X' &&
-        gameBoard.gamePlan[8] === ''
+        gameBoard.gamePlan[5] === 'X'
+        && gameBoard.gamePlan[7] === 'X'
+        && gameBoard.gamePlan[8] === ''
       ) {
         currectCell = 8;
       } else if (
-        gameBoard.gamePlan[3] === 'X' &&
-        gameBoard.gamePlan[7] === 'X' &&
-        gameBoard.gamePlan[6] === ''
+        gameBoard.gamePlan[3] === 'X'
+        && gameBoard.gamePlan[7] === 'X'
+        && gameBoard.gamePlan[6] === ''
       ) {
         currectCell = 6;
       } else if (
-        ((gameBoard.gamePlan[0] === 'O' && gameBoard.gamePlan[1] === 'O') ||
-          (gameBoard.gamePlan[6] === 'O' && gameBoard.gamePlan[4] === 'O') ||
-          (gameBoard.gamePlan[5] === 'O' && gameBoard.gamePlan[8] === 'O')) &&
-        gameBoard.gamePlan[2] === ''
+        ((gameBoard.gamePlan[0] === 'O' && gameBoard.gamePlan[1] === 'O')
+          || (gameBoard.gamePlan[6] === 'O' && gameBoard.gamePlan[4] === 'O')
+          || (gameBoard.gamePlan[5] === 'O' && gameBoard.gamePlan[8] === 'O'))
+        && gameBoard.gamePlan[2] === ''
       ) {
         currectCell = 2;
       } else if (
-        ((gameBoard.gamePlan[1] === 'O' && gameBoard.gamePlan[2] === 'O') ||
-          (gameBoard.gamePlan[3] === 'O' && gameBoard.gamePlan[6] === 'O') ||
-          (gameBoard.gamePlan[4] === 'O' && gameBoard.gamePlan[8] === 'O')) &&
-        gameBoard.gamePlan[0] === ''
+        ((gameBoard.gamePlan[1] === 'O' && gameBoard.gamePlan[2] === 'O')
+          || (gameBoard.gamePlan[3] === 'O' && gameBoard.gamePlan[6] === 'O')
+          || (gameBoard.gamePlan[4] === 'O' && gameBoard.gamePlan[8] === 'O'))
+        && gameBoard.gamePlan[0] === ''
       ) {
         currectCell = 0;
       } else if (
-        ((gameBoard.gamePlan[0] === 'O' && gameBoard.gamePlan[3] === 'O') ||
-          (gameBoard.gamePlan[2] === 'O' && gameBoard.gamePlan[4] === 'O') ||
-          (gameBoard.gamePlan[7] === 'O' && gameBoard.gamePlan[8] === 'O')) &&
-        gameBoard.gamePlan[6] === ''
+        ((gameBoard.gamePlan[0] === 'O' && gameBoard.gamePlan[3] === 'O')
+          || (gameBoard.gamePlan[2] === 'O' && gameBoard.gamePlan[4] === 'O')
+          || (gameBoard.gamePlan[7] === 'O' && gameBoard.gamePlan[8] === 'O'))
+        && gameBoard.gamePlan[6] === ''
       ) {
         currectCell = 6;
       } else if (
-        ((gameBoard.gamePlan[2] === 'O' && gameBoard.gamePlan[5] === 'O') ||
-          (gameBoard.gamePlan[0] === 'O' && gameBoard.gamePlan[4] === 'O') ||
-          (gameBoard.gamePlan[6] === 'O' && gameBoard.gamePlan[7] === 'O')) &&
-        gameBoard.gamePlan[8] === ''
+        ((gameBoard.gamePlan[2] === 'O' && gameBoard.gamePlan[5] === 'O')
+          || (gameBoard.gamePlan[0] === 'O' && gameBoard.gamePlan[4] === 'O')
+          || (gameBoard.gamePlan[6] === 'O' && gameBoard.gamePlan[7] === 'O'))
+        && gameBoard.gamePlan[8] === ''
       ) {
         currectCell = 8;
       } else if (
-        ((gameBoard.gamePlan[0] === '0' && gameBoard.gamePlan[2]) ||
-          (gameBoard.gamePlan[4] === '0' && gameBoard.gamePlan[7])) &&
-        gameBoard.gamePlan[1] === ''
+        ((gameBoard.gamePlan[0] === '0' && gameBoard.gamePlan[2])
+          || (gameBoard.gamePlan[4] === '0' && gameBoard.gamePlan[7]))
+        && gameBoard.gamePlan[1] === ''
       ) {
         currectCell = 1;
       } else if (
-        ((gameBoard.gamePlan[2] === '0' && gameBoard.gamePlan[8]) ||
-          (gameBoard.gamePlan[3] === '0' && gameBoard.gamePlan[4])) &&
-        gameBoard.gamePlan[5] === ''
+        ((gameBoard.gamePlan[2] === '0' && gameBoard.gamePlan[8])
+          || (gameBoard.gamePlan[3] === '0' && gameBoard.gamePlan[4]))
+        && gameBoard.gamePlan[5] === ''
       ) {
         currectCell = 5;
       } else if (
-        ((gameBoard.gamePlan[1] === '0' && gameBoard.gamePlan[4]) ||
-          (gameBoard.gamePlan[6] === '0' && gameBoard.gamePlan[8])) &&
-        gameBoard.gamePlan[7] === ''
+        ((gameBoard.gamePlan[1] === '0' && gameBoard.gamePlan[4])
+          || (gameBoard.gamePlan[6] === '0' && gameBoard.gamePlan[8]))
+        && gameBoard.gamePlan[7] === ''
       ) {
         currectCell = 7;
       } else if (
-        ((gameBoard.gamePlan[0] === '0' && gameBoard.gamePlan[6]) ||
-          (gameBoard.gamePlan[4] === '0' && gameBoard.gamePlan[5])) &&
-        gameBoard.gamePlan[3] === ''
+        ((gameBoard.gamePlan[0] === '0' && gameBoard.gamePlan[6])
+          || (gameBoard.gamePlan[4] === '0' && gameBoard.gamePlan[5]))
+        && gameBoard.gamePlan[3] === ''
       ) {
         currectCell = 3;
       } else if (
-        ((gameBoard.gamePlan[1] === '0' && gameBoard.gamePlan[7]) ||
-          (gameBoard.gamePlan[3] === '0' && gameBoard.gamePlan[5]) ||
-          (gameBoard.gamePlan[2] === '0' && gameBoard.gamePlan[6]) ||
-          (gameBoard.gamePlan[0] === '0' && gameBoard.gamePlan[8])) &&
-        gameBoard.gamePlan[4] === ''
+        ((gameBoard.gamePlan[1] === '0' && gameBoard.gamePlan[7])
+          || (gameBoard.gamePlan[3] === '0' && gameBoard.gamePlan[5])
+          || (gameBoard.gamePlan[2] === '0' && gameBoard.gamePlan[6])
+          || (gameBoard.gamePlan[0] === '0' && gameBoard.gamePlan[8]))
+        && gameBoard.gamePlan[4] === ''
       ) {
         currectCell = 4;
       } else if (
-        gameBoard.gamePlan[gameBoard.gamePlan.indexOf('O') + 1] > 0 &&
-        gameBoard.gamePlan[gameBoard.gamePlan.indexOf('O') + 1] < 8 &&
-        gameBoard.gamePlan[gameBoard.gamePlan.indexOf('O') + 1] === ''
+        gameBoard.gamePlan[gameBoard.gamePlan.indexOf('O') + 1] > 0
+        && gameBoard.gamePlan[gameBoard.gamePlan.indexOf('O') + 1] < 8
+        && gameBoard.gamePlan[gameBoard.gamePlan.indexOf('O') + 1] === ''
       ) {
         const index = gameBoard.gamePlan.indexOf('O');
         currectCell = index + 1;
       } else if (
-        gameBoard.gamePlan[gameBoard.gamePlan.indexOf('O') + 3] > 0 &&
-        gameBoard.gamePlan[gameBoard.gamePlan.indexOf('O') + 3] < 8 &&
-        gameBoard.gamePlan[gameBoard.gamePlan.indexOf('O') + 3] === ''
+        gameBoard.gamePlan[gameBoard.gamePlan.indexOf('O') + 3] > 0
+        && gameBoard.gamePlan[gameBoard.gamePlan.indexOf('O') + 3] < 8
+        && gameBoard.gamePlan[gameBoard.gamePlan.indexOf('O') + 3] === ''
       ) {
         const index2 = gameBoard.gamePlan.indexOf('O');
         currectCell = index2 + 3;
       } else if (
-        gameBoard.gamePlan[gameBoard.gamePlan.indexOf('X')] === '' &&
-        gameBoard.gamePlan[gameBoard.gamePlan.indexOf('X')] > -1 &&
-        gameBoard.gamePlan[gameBoard.gamePlan.indexOf('X')] < 0
+        gameBoard.gamePlan[gameBoard.gamePlan.indexOf('X')] === ''
+        && gameBoard.gamePlan[gameBoard.gamePlan.indexOf('X')] > -1
+        && gameBoard.gamePlan[gameBoard.gamePlan.indexOf('X')] < 0
       ) {
         const index3 = gameBoard.gamePlan.indexOf('X');
         currectCell = index3 + 3;
       } else if (
-        gameBoard.gamePlan[2] === 'X' &&
-        gameBoard.gamePlan[6] === 'X' &&
-        gameBoard.gamePlan[8] === ''
+        gameBoard.gamePlan[2] === 'X'
+        && gameBoard.gamePlan[6] === 'X'
+        && gameBoard.gamePlan[8] === ''
       ) {
         currectCell = 8;
       } else if (
-        gameBoard.gamePlan[0] === 'X' &&
-        gameBoard.gamePlan[8] === 'X' &&
-        gameBoard.gamePlan[6] === ''
+        gameBoard.gamePlan[0] === 'X'
+        && gameBoard.gamePlan[8] === 'X'
+        && gameBoard.gamePlan[6] === ''
       ) {
         currectCell = 6;
       } else {
@@ -468,15 +469,15 @@ const Players = (mark, activity) => {
 
       if ((playerOnePasive = true)) {
         if (
-          gameBoard.gamePlan[currectCell] !== 'X' &&
-          gameBoard.gamePlan[currectCell] !== 'O'
+          gameBoard.gamePlan[currectCell] !== 'X'
+          && gameBoard.gamePlan[currectCell] !== 'O'
         ) {
           gameBoard.getCell(currectCell, 'O');
           gameBoard.checkForWin();
           playerOnePasive = false;
         } else if (
-          gameBoard.gamePlan[currectCell] === 'X' &&
-          gameBoard.gamePlan[currectCell] === 'O'
+          gameBoard.gamePlan[currectCell] === 'X'
+          && gameBoard.gamePlan[currectCell] === 'O'
         ) {
           false;
         }
@@ -484,5 +485,7 @@ const Players = (mark, activity) => {
     }
   };
 
-  return { playGame, getMark, getActivity, playerOnePasive };
+  return {
+    playGame, getMark, getActivity, playerOnePasive,
+  };
 };
