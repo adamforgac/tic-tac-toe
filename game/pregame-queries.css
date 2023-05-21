@@ -11,6 +11,20 @@
     }
 }
 
+@media only screen and (min-width: 2000px) {
+    .button-options {
+        padding: 140px 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button {
+        margin-bottom: 50px;
+    }
+}
+
 @media only screen and (max-width: 1270px) {
     .heading img {
         width: 270px;
