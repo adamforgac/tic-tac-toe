@@ -1,2 +1,2 @@
 # tic-tac-toe
-tic tac toe game
+Tic Tac Toe game with optional game modes.
