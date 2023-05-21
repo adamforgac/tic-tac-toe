@@ -118,8 +118,8 @@
 @media only screen and (max-width: 500px) {
     .heading img {
         display: unset;
-        width: 110px;
-        top: 58%;
+        width: 90px;
+        top: 350px;
         left: 50%;
         transform: translate(-50%, -50%);
     }
